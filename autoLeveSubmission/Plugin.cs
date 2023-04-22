@@ -1,28 +1,37 @@
-﻿using Dalamud.Game.Command;
+﻿using System;
+using Dalamud.Game.Command;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using System.IO;
+using System.Runtime.CompilerServices;
 using autoLeveSubmission.Windows;
 using Dalamud.Game.Gui;
 using Dalamud.Interface.Windowing;
-using FFXIVClientStructs.FFXIV.Client.Game.Control;
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using TargetManager = Dalamud.Game.ClientState.Objects.TargetManager;
+
 
 
 namespace autoLeveSubmission
 {
     public sealed class Plugin : IDalamudPlugin
     {
-        public string Name => "Sample Plugin";
-        private const string CommandName = "/pmycommand";
+        public string Name => "autoLeveSubmission";
+        private const string CommandName = "/autoleve";
 
 
         private DalamudPluginInterface PluginInterface { get; init; }
         private CommandManager CommandManager { get; init; }
         public Configuration Configuration { get; init; }
-        public WindowSystem WindowSystem = new("SamplePlugin");
+        public WindowSystem WindowSystem = new("autoLeveSubmission");
 
         private ConfigWindow ConfigWindow { get; init; }
         private MainWindow MainWindow { get; init; }
+
+        private Character Character { get; }
+        public static TargetManager TargetManager { get; }
+        public static uint i = 0;
 
         public Plugin(
             [RequiredVersion("1.0")] DalamudPluginInterface pluginInterface,
@@ -51,6 +60,13 @@ namespace autoLeveSubmission
 
             this.PluginInterface.UiBuilder.Draw += DrawUI;
             this.PluginInterface.UiBuilder.OpenConfigUi += DrawConfigUI;
+        }
+
+        
+        public string PrintTargetID()
+        {
+            
+            return "hi";
         }
 
         public void Dispose()
