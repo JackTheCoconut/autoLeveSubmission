@@ -2,6 +2,7 @@
 using System.Numerics;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Interface.Windowing;
+using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using ImGuiNET;
 using ImGuiScene;
 
@@ -37,13 +38,14 @@ public class MainWindow : Window, IDisposable
         if (ImGui.Button("Show Settings"))
         {
             this.Plugin.DrawConfigUI();
-        }
+        }   
 
         ImGui.Spacing();
-        
+        TargetSystem temp = new TargetSystem();
         ImGui.Text("Have a goat:");
+        ImGui.Text(temp.GetCurrentTargetID().ToString());
         ImGui.Indent(55);
-        ImGui.Image(this.GoatImage.ImGuiHandle, new Vector2(this.GoatImage.Width, this.GoatImage.Height));
+        //ImGui.Image(this.GoatImage.ImGuiHandle, new Vector2(this.GoatImage.Width, this.GoatImage.Height));
         ImGui.Unindent(55);
     }
 }
