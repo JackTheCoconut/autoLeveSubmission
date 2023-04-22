@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.Command;
+using Dalamud.Game.Command;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using System.IO;
@@ -13,7 +13,7 @@ namespace autoLeveSubmission
     public sealed class Plugin : IDalamudPlugin
     {
         public string Name => "Sample Plugin";
-        private const string CommandName = "/pmycommand";
+        private const string CommandName = "/autoleve";
 
 
         private DalamudPluginInterface PluginInterface { get; init; }
