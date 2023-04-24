@@ -9,8 +9,11 @@ using Dalamud.Game.Gui;
 using Dalamud.Interface.Windowing;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using TargetManager = Dalamud.Game.ClientState.Objects.TargetManager;
-
+using ImGuiNET;
+using Dalamud.Game.ClientState.Objects;
+using Dalamud.Hooking;
+using FFXIVClientStructs.FFXIV.Client.Game.Control;
+using Lumina;
 
 
 namespace autoLeveSubmission
@@ -29,9 +32,8 @@ namespace autoLeveSubmission
         private ConfigWindow ConfigWindow { get; init; }
         private MainWindow MainWindow { get; init; }
 
-        private Character Character { get; }
-        public static TargetManager TargetManager { get; }
-        public static uint i = 0;
+        public static int i = 0;
+        private TargetManager? TargetManager { get; set; }
 
         public Plugin(
             [RequiredVersion("1.0")] DalamudPluginInterface pluginInterface,
@@ -60,13 +62,25 @@ namespace autoLeveSubmission
 
             this.PluginInterface.UiBuilder.Draw += DrawUI;
             this.PluginInterface.UiBuilder.OpenConfigUi += DrawConfigUI;
+            
         }
 
         
-        public string PrintTargetID()
+        public void PrintTargetID()
         {
-            
-            return "hi";
+            //0x7ff7ceb9b380;
+            if (TargetManager != null)
+            {
+                ImGui.Text("I'm not null");
+                  
+            }
+            else
+            {
+                ImGui.Text(  "the Address is: "+ TargetManager.Address.ToString());
+                ImGui.Text("i'm Null");
+            }
+                
+
         }
 
         public void Dispose()
