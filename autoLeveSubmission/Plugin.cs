@@ -33,14 +33,16 @@ namespace autoLeveSubmission
         private MainWindow MainWindow { get; init; }
 
         public static int i = 0;
-        private TargetManager? TargetManager { get; set; }
+
+        private TargetManager TargetManager { get; init; }
 
         public Plugin(
             [RequiredVersion("1.0")] DalamudPluginInterface pluginInterface,
-            [RequiredVersion("1.0")] CommandManager commandManager)
+            [RequiredVersion("1.0")] CommandManager commandManager, TargetManager targetManager)
         {
             this.PluginInterface = pluginInterface;
             this.CommandManager = commandManager;
+            TargetManager = targetManager;
 
             this.Configuration = this.PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
             this.Configuration.Initialize(this.PluginInterface);
@@ -72,12 +74,11 @@ namespace autoLeveSubmission
             if (TargetManager != null)
             {
                 ImGui.Text("I'm not null");
-                  
+                ImGui.Text(TargetManager.Target.DataId.ToString());
             }
             else
             {
                 ImGui.Text(  "the Address is: "+ TargetManager.Address.ToString());
-                ImGui.Text("i'm Null");
             }
                 
 
