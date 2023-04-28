@@ -14,6 +14,7 @@ using Dalamud.Game.ClientState.Objects;
 using Dalamud.Hooking;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using Lumina;
+using GameObject = Dalamud.Game.ClientState.Objects.Types.GameObject;
 
 
 namespace autoLeveSubmission
@@ -34,7 +35,7 @@ namespace autoLeveSubmission
 
         public static int i = 0;
 
-        private TargetManager TargetManager { get; init; }
+        public TargetManager TargetManager { get; init; }
 
         public Plugin(
             [RequiredVersion("1.0")] DalamudPluginInterface pluginInterface,
@@ -68,20 +69,33 @@ namespace autoLeveSubmission
         }
 
         
-        public void PrintTargetID()
+        public string PrintTargetID()
         {
             //0x7ff7ceb9b380;
             if (TargetManager != null)
             {
-                ImGui.Text("I'm not null");
-                ImGui.Text(TargetManager.Target.DataId.ToString());
+                return TargetManager.Target.DataId.ToString();
             }
             else
             {
-                ImGui.Text(  "the Address is: "+ TargetManager.Address.ToString());
+                return "NULL";
             }
-                
+        }
 
+        public GameObject FindTarget(ref TargetManager targetManager)
+        {
+            if (targetManager.Target.DataId == 1037263)
+                return targetManager.Target.TargetObject;
+            return null;
+        }
+        public void ChangeTarget(ref TargetManager targetManager)
+        {
+            
+        }
+
+        public void FocusOnTarget()
+        {
+            TargetManager.FocusTarget = TargetManager.SoftTarget;
         }
 
         public void Dispose()

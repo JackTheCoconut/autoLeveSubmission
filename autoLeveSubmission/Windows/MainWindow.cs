@@ -37,22 +37,13 @@ public class MainWindow : Window, IDisposable
     {
        
         ImGui.Text($"The random config bool is {this.Plugin.Configuration.SomePropertyToBeSavedAndWithADefault}");
-        
-        
-        
+
+
+        if(ImGui.Button("Focus"))
+            Plugin.FocusOnTarget();
 
         ImGui.Text("----------------------------");
-        try
-        {
-            ImGui.Text("i'm trying");
-            Plugin.PrintTargetID();
-        }
-        catch(Exception e)
-        {
-            Plugin.i += 1;
-            ImGui.Text(Plugin.i.ToString());
-            ImGui.Text(e.Message);
-        }
+        ImGui.Text("The DataID is: " + Plugin.PrintTargetID()); 
         ImGui.Text("----------------------------");
 
 
